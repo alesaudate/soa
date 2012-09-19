@@ -11,11 +11,11 @@ public class UsuariosService {
 	
 	
 	public void criarUsuario (Usuario usuario) {
-		
+		// lógica de criação de usuários
 	}
 	
 	public static void main(String[] args) {
-		Endpoint.publish("http://localhost:8090/usuarios/usuarioService", new UsuariosService());
+		Endpoint.publish("http://localhost:8080/usuarios", new UsuariosService());
 		System.out.println("Serviço inicializado!");
 	}
 
