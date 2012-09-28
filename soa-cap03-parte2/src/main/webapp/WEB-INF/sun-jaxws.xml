@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns='http://java.sun.com/xml/ns/jax-ws/ri/runtime'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jax-ws/ri/runtime http://java.sun.com/webservices/docs/2.0/jaxws/sun-jaxws.xsd"
+	version='2.0'>
+	<endpoint name='livros' implementation='com.knight.estoque.servicos.ListagemLivrosService'
+		url-pattern='/livros' 
+		wsdl="WEB-INF/wsdl/livros.wsdl" />
+</endpoints>

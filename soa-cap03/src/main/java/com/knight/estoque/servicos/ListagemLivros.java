@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.xml.ws.Endpoint;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -35,6 +36,10 @@ public class ListagemLivros {
 	
 	private LivroDAO obterDAO() {
 		return new LivroDAO();
-	}	
+	}
+	
+	public static void main(String[] args) {
+		Endpoint.publish("http://localhost:8080/livros", new ListagemLivros());
+	}
 
 }

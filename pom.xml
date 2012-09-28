@@ -6,6 +6,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>soa-cap01</module>
+		<module>soa-cap01-client</module>
+		<module>soa-cap02</module>
+		<module>soa-cap02-client</module>
+		<module>soa-cap03</module>
+	</modules>
 
 	<build>
 		<plugins>

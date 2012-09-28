@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://servicos.estoque.knight.com/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ListagemLivrosService" targetNamespace="http://servicos.estoque.knight.com/">
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="http://servicos.estoque.knight.com/" schemaLocation="livros.xsd"/>
+		</xsd:schema>
+	</types>
+	<message name="listarLivrosPaginacao">
+		<part element="tns:listarLivrosPaginacao" name="parameters"/>
+	</message>
+	<message name="listarLivrosPaginacaoResponse">
+		<part element="tns:listarLivrosPaginacaoResponse" name="parameters"/>
+	</message>
+	<message name="listarLivros">
+		<part element="tns:listarLivros" name="parameters"/>
+	</message>
+	<message name="listarLivrosResponse">	
+		<part element="tns:listarLivrosResponse" name="parameters"/>
+	</message>
+	<message name="criarLivro">
+		<part element="tns:criarLivro" name="parameters"/>
+	</message>
+	<message name="criarLivroResponse">
+		<part element="tns:criarLivroResponse" name="parameters"/>
+	</message>
+	<portType name="ListagemLivros">
+		<operation name="listarLivrosPaginacao">
+			<input message="tns:listarLivrosPaginacao" wsam:Action="http://servicos.estoque.knight.com/ListagemLivros/listarLivrosPaginacaoRequest"/>
+			<output message="tns:listarLivrosPaginacaoResponse" wsam:Action="http://servicos.estoque.knight.com/ListagemLivros/listarLivrosPaginacaoResponse"/>
+		</operation>
+		<operation name="listarLivros">
+			<input message="tns:listarLivros" wsam:Action="http://servicos.estoque.knight.com/ListagemLivros/listarLivrosRequest"/>
+			<output message="tns:listarLivrosResponse" wsam:Action="http://servicos.estoque.knight.com/ListagemLivros/listarLivrosResponse"/>
+		</operation>
+		<operation name="criarLivro">
+			<input message="tns:criarLivro" wsam:Action="http://servicos.estoque.knight.com/ListagemLivros/criarLivroRequest"/>
+			<output message="tns:criarLivroResponse" wsam:Action="http://servicos.estoque.knight.com/ListagemLivros/criarLivroResponse"/>
+		</operation>
+	</portType>
+	<binding name="ListagemLivrosPortBinding" type="tns:ListagemLivros">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="listarLivrosPaginacao">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="listarLivros">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="criarLivro">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="ListagemLivrosService">
+		<port binding="tns:ListagemLivrosPortBinding" name="ListagemLivrosPort">
+			<soap:address location="http://tempuri.org/soa-cap03/services/ListagemLivrosPort"/>
+		</port>
+	</service>
+</definitions>
