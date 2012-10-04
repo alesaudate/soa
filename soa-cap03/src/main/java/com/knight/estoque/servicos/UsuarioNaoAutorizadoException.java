@@ -1,7 +1,6 @@
 package com.knight.estoque.servicos;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,6 +11,8 @@ import javax.xml.ws.WebFault;
       targetNamespace = "http://servicos.estoque.knight.com/excecoes/",
       name = "UsuarioNaoAutorizado")
 public class UsuarioNaoAutorizadoException extends Exception {
+
+   private static final long serialVersionUID = 1L;
 
    public UsuarioNaoAutorizadoException() {
    }
@@ -52,6 +53,10 @@ public class UsuarioNaoAutorizadoException extends Exception {
       }
 
       public UsuarioFaultInfo() {
+      }
+
+      public Date getData() {
+         return data;
       }
 
    }
