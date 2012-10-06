@@ -18,7 +18,7 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class Autor {
 
    private String nome;
@@ -33,7 +33,7 @@ public class Autor {
       this.dataNascimento = dataNascimento;
    }
 
-   public List<URL> getRefs() throws HttpException, IOException {
+   public List<URL> refs() throws HttpException, IOException {
 
       String autor = nome.replace(" ", "+");
       String searchString = new StringBuilder(
@@ -80,13 +80,6 @@ public class Autor {
 
    public void setDataNascimento(Date dataNascimento) {
       this.dataNascimento = dataNascimento;
-   }
-
-   public static void main(String[] args) throws HttpException, IOException {
-      List<URL> urls = new Autor("Alexandre Saudate", null).getRefs();
-      for (URL url : urls) {
-         System.out.println(url);
-      }
    }
 
 }
