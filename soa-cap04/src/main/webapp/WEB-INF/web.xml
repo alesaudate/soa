@@ -1,0 +1,17 @@
+<web-app>
+   <listener>
+      <listener-class>
+         com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+      </listener-class>
+   </listener>	
+	
+   <servlet>
+      <servlet-name>jaxws-servlet</servlet-name>
+      <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+   </servlet>
+	
+   <servlet-mapping>
+      <servlet-name>jaxws-servlet</servlet-name>
+      <url-pattern>/*</url-pattern>
+   </servlet-mapping>
+</web-app>

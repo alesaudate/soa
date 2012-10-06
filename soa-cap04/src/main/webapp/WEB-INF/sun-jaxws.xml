@@ -1,0 +1,8 @@
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">  
+   <endpoint name="livros" 
+      implementation="com.knight.estoque.servicos.LivrosService" 
+      url-pattern="/livros" />
+   <endpoint name="autores" 
+      implementation="com.knight.estoque.servicos.AutoresService" 
+      url-pattern="/autores" />
+</endpoints>
