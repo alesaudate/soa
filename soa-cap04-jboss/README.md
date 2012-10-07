@@ -12,7 +12,7 @@ Projeto relativo ao capítulo 4 do livro, adaptado para rodar no JBoss Applicati
 * Execute o comando mvn package jboss-as:deploy
 * Confira os logs
 
-## Diferenças entre o anterior (soa-cap04-jboss)
+## Diferenças entre o anterior (soa-cap04)
 
 * Os arquivos web.xml e sun-jaxws.xml foram removidos
 * O plugin do Jetty foi removido do pom.xml
