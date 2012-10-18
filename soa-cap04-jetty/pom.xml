@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>soa-cap04-a</artifactId>
+	<artifactId>soa-cap04-jetty</artifactId>
 	<packaging>war</packaging>
 
 

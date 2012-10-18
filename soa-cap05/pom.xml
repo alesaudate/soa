@@ -7,21 +7,16 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>soa-cap04-jboss</artifactId>
+	<artifactId>soa-cap05</artifactId>
 	<packaging>war</packaging>
 
 
 	<dependencies>
+
 		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.4</version>
-			<classifier>jdk15</classifier>
+			<groupId>br.com.caelum.stella</groupId>
+			<artifactId>caelum-stella-core</artifactId>
+			<version>1.2</version>
 		</dependency>
 
 		<!-- Dependências adicionadas para que o Maven possa compilar os EJB's -->
@@ -37,18 +32,16 @@
 			<version>1.0.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ws.rs</groupId>
+			<artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+			<version>1.0.0.Final</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<!-- Java EE 6 não requer o arquivo web.xml -->
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
 			<!-- JBoss AS plugin -->
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
