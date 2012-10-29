@@ -2,6 +2,7 @@ package com.knight.estoque.modelos;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -35,7 +36,7 @@ public class Autor {
 
    public List<URL> refs() throws HttpException, IOException {
 
-      String autor = nome.replace(" ", "+");
+      String autor = URLEncoder.encode(nome, "UTF-8");
       String searchString = new StringBuilder(
             "/ajax/services/search/web?v=1.0&q=%22").append(autor)
             .append("%22").toString();
