@@ -1,6 +1,7 @@
 package com.knight.usuarios.modelos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -26,8 +27,16 @@ public class Usuarios implements RESTEntity {
    public Usuarios() {
    }
 
-   public Usuarios(Collection<Usuario> usuarios) {
+   public Usuarios(Collection<Usuario> usuarios, Link... links) {
       this.usuarios = usuarios;
+      this.links = new ArrayList<>(Arrays.asList(links));
+   }
+
+   @Override
+   public void adicionarLink(Link link) {
+      if (links == null)
+         links = new ArrayList<>();
+      links.add(link);
    }
 
    public Collection<Usuario> getUsuarios() {
@@ -36,13 +45,6 @@ public class Usuarios implements RESTEntity {
 
    public void setUsuarios(Collection<Usuario> usuarios) {
       this.usuarios = usuarios;
-   }
-
-   @Override
-   public void adicionarLink(Link link) {
-      if (links == null)
-         links = new ArrayList<>();
-      links.add(link);
    }
 
 }

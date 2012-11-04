@@ -16,6 +16,22 @@ public class Link {
    @XmlAttribute
    private String rel;
 
+   @XmlAttribute
+   private String type;
+
+   public Link(String href, String rel) {
+      this.href = href;
+      this.rel = rel;
+   }
+
+   public Link(String href, String rel, String type) {
+      this(href, rel);
+      this.type = type;
+   }
+
+   public Link() {
+   }
+
    public String getHref() {
       return href;
    }
