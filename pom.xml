@@ -12,7 +12,10 @@
 		<module>soa-cap02</module>
 		<module>soa-cap02-client</module>
 		<module>soa-cap03</module>
-		<module>soa-cap04</module>
+		<module>soa-cap04-jboss</module>
+		<module>soa-cap04-jetty</module>
+		<module>soa-cap05</module>
+		<module>soa-cap06-estoque</module>
 	</modules>
 
 	<build>
