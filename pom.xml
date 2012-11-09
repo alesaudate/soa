@@ -16,6 +16,7 @@
 		<module>soa-cap04-jetty</module>
 		<module>soa-cap05</module>
 		<module>soa-cap06-estoque</module>
+		<module>soa-cap06-usuarios</module>
 	</modules>
 
 	<build>

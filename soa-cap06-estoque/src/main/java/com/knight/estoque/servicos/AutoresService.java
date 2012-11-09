@@ -15,37 +15,24 @@ import org.jboss.ws.api.annotation.WebContext;
 
 import com.knight.estoque.modelos.Autor;
 
-@WebService(
-      portName = "AutoresServicePort",
-      serviceName = "AutoresServiceService",
-      targetNamespace = "http://servicos.estoque.knight.com/",
-      wsdlLocation = "WEB-INF/wsdl/AutoresService.wsdl")
-@EndpointConfig(
-      configFile = "WEB-INF/jaxws-endpoint-config.xml",
-      configName = "Custom WS-Security Endpoint")
-@WebContext(
-      secureWSDLAccess = true, transportGuarantee = "CONFIDENTIAL",
-      urlPattern = "AutoresService")
+@WebService(portName = "AutoresServicePort", serviceName = "AutoresServiceService", targetNamespace = "http://servicos.estoque.knight.com/", wsdlLocation = "WEB-INF/wsdl/AutoresService.wsdl")
+@EndpointConfig(configFile = "WEB-INF/jaxws-endpoint-config.xml", configName = "Custom WS-Security Endpoint")
+@WebContext(secureWSDLAccess = true, transportGuarantee = "CONFIDENTIAL", urlPattern = "AutoresService")
 @Stateless
 public class AutoresService {
 
-   @Resource
-   private WebServiceContext context;
+	@Resource
+	private WebServiceContext context;
 
-   @PersistenceContext
-   private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-   public List<Autor> listarAutores() {
-      WSUsernameTokenPrincipal principal = (WSUsernameTokenPrincipal) context
-            .getUserPrincipal();
+	public List<Autor> listarAutores() {
+		WSUsernameTokenPrincipal principal = (WSUsernameTokenPrincipal) context
+				.getUserPrincipal();
 
-      System.out
-            .println(principal
-                  .getName());
-      return em
-            .createQuery(
-                  "select a from Autor a", Autor.class)
-            .getResultList();
-   }
+		return em.createQuery("select a from Autor a", Autor.class)
+				.getResultList();
+	}
 
 }

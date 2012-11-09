@@ -1,0 +1,34 @@
+<web-app>
+	<servlet-mapping>
+		<servlet-name>javax.ws.rs.core.Application</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<security-role>
+		<description>Administrators</description>
+		<role-name>admin</role-name>
+	</security-role>
+	<!-- Resource / Role Mapping -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>services</web-resource-name>
+			<url-pattern>/services/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>OPTIONS</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	<!-- Login Prompt -->
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+</web-app>
