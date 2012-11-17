@@ -17,6 +17,8 @@
 		<module>soa-cap05</module>
 		<module>soa-cap06-estoque</module>
 		<module>soa-cap06-usuarios</module>
+		<module>soa-cap06-estoque-cliente</module>
+		<module>soa-cap06-chaves</module>
 	</modules>
 
 	<build>
