@@ -6,7 +6,7 @@ insert into Usuario (nome,login,senha, imagem_id, dataAtualizacao) values ('Adri
 insert into Usuario (nome,login,senha, imagem_id, dataAtualizacao) values ('Matheus','matheus','matheus',null,CURRENT_TIMESTAMP);
 
 CREATE table usuario_privilegiado (login char(30), senha char(60));
-insert into usuario_privilegiado (login, senha) values('admin', 'lK77i+eLK3w0TRHRuop57wh+zrGRUIgfaUYLh3J1MmM=');
+insert into usuario_privilegiado (login, senha) values('admin', 'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=');
 
 
 
