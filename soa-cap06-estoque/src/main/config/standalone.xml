@@ -233,6 +233,17 @@
                         </login-module>
                     </authentication>
                 </security-domain>
+                <security-domain name="MyRealm">
+                    <authentication>
+                        <login-module code="Database" flag="required">
+                            <module-option name="dsJndiName" value="java:jboss/datasources/KnightUsuariosDS"/>
+                            <module-option name="principalsQuery" value="select senha from usuario_privilegiado where login=?"/>
+                            <module-option name="rolesQuery" value="select 'admin','Roles' from usuario_privilegiado where login=?"/>
+                            <module-option name="hashAlgorithm" value="SHA-256"/>
+                            <module-option name="hashEncoding" value="base64"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
                 <security-domain name="jboss-web-policy" cache-type="default">
                     <authorization>
                         <policy-module code="Delegating" flag="required"/>
@@ -308,4 +319,13 @@
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
     </socket-binding-group>
+
+    <deployments>
+        <deployment name="soa-cap06-usuarios-0.0.1-SNAPSHOT.war" runtime-name="soa-cap06-usuarios-0.0.1-SNAPSHOT.war">
+            <content sha1="8ccd6093a8bb571168b4da5d8710b99393163310"/>
+        </deployment>
+        <deployment name="soa-cap06-estoque-0.0.1-SNAPSHOT.war" runtime-name="soa-cap06-estoque-0.0.1-SNAPSHOT.war">
+            <content sha1="aefbb9e562b449549e5479a7fa7e71db687bb615"/>
+        </deployment>
+    </deployments>
 </server>
