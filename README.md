@@ -1,4 +1,4 @@
-soa
+SOA Aplicado: integrando com web services e além
 ===
 
 Aqui você encontra o código-fonte do livro "SOA aplicado: integrando com web services e além". (Disponível em <http://www.casadocodigo.com.br/products/soa-aplicado-integrando-com-web-services-e-alem>)
