@@ -21,7 +21,17 @@ public class CallbackSeguranca implements CallbackHandler {
 
 	private static String USUARIO = "admin";
 
-	private static String SENHA = "mysecretpassword";
+	private static String SENHA = "admin";
+
+	private static ChaveRSA chaveRSA;
+
+	static {
+		try {
+			chaveRSA = ChaveRSA.carregar();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private static String ENDERECO_SERVICO_USUARIOS = "https://localhost:8443/soa-cap06-usuarios-0.0.1-SNAPSHOT/services/usuarios/{login}";
 
@@ -49,6 +59,7 @@ public class CallbackSeguranca implements CallbackHandler {
 
 			ClientRequest request = new ClientRequest(ENDERECO_SERVICO_USUARIOS)
 					.pathParameters(login).header("Authorization", getAuth())
+					.body(MediaType.APPLICATION_XML, chaveRSA)
 					.accept(MediaType.APPLICATION_XML);
 
 			if (cache.containsKey(login)) {
@@ -58,7 +69,7 @@ public class CallbackSeguranca implements CallbackHandler {
 			}
 
 			@SuppressWarnings("unchecked")
-			ClientResponse<Usuario> response = request.get();
+			ClientResponse<Usuario> response = request.post();
 			if (response.getStatus() == Status.NOT_MODIFIED.getStatusCode()) {
 				return usuario;
 			}

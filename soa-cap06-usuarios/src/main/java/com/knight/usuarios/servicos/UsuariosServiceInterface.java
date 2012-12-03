@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.knight.usuarios.modelos.Usuario;
+import com.knight.usuarios.servicos.seguranca.RSAPublica;
 
 @Path("/usuarios")
 @Produces(MediaType.APPLICATION_XML)
@@ -44,10 +45,11 @@ public interface UsuariosServiceInterface {
 	public Response find(@PathParam("id") Long id,
 			@HeaderParam("If-Modified-Since") Date modifiedSince);
 
-	@GET
+	@POST
 	@Path("/{login}")
 	public Response find(@PathParam("login") String login,
-			@HeaderParam("If-Modified-Since") Date modifiedSince);
+			@HeaderParam("If-Modified-Since") Date modifiedSince,
+			RSAPublica chaveCriptografica);
 
 	@POST
 	public Response create(@Context UriInfo uriInfo, Usuario usuario);

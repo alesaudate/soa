@@ -1,55 +1,31 @@
 package com.knight.usuarios.servicos;
 
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.net.URI;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.crypto.Cipher;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.commons.codec.binary.Base64;
-
 import com.knight.usuarios.modelos.Imagem;
 import com.knight.usuarios.modelos.Usuario;
 import com.knight.usuarios.modelos.Usuarios;
 import com.knight.usuarios.modelos.rest.Link;
+import com.knight.usuarios.servicos.seguranca.RSAPublica;
 
 @Stateless
 public class UsuariosService implements UsuariosServiceInterface {
 
 	@PersistenceContext
 	private EntityManager em;
-
-	private static Cipher cipher;
-
-	static {
-		try {
-			InputStream keyStream = Thread.currentThread()
-					.getContextClassLoader().getResourceAsStream("public.key");
-			ObjectInputStream ois = new ObjectInputStream(keyStream);
-
-			Key publicKey = (Key) ois.readObject();
-
-			cipher = Cipher.getInstance("RSA");
-			cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	@Override
 	public Response listarUsuarios(Date modifiedSince, Integer inicio,
@@ -256,8 +232,8 @@ public class UsuariosService implements UsuariosServiceInterface {
 		return links.toArray(new Link[] {});
 	}
 
-	public Response find(@PathParam("login") String login,
-			@HeaderParam("If-Modified-Since") Date modifiedSince) {
+	public Response find(String login, Date modifiedSince,
+			RSAPublica chaveCriptografica) {
 		Usuario usuario = em
 				.createNamedQuery("usuario.encontrar.login", Usuario.class)
 				.setParameter(1, login).getSingleResult();
@@ -268,8 +244,8 @@ public class UsuariosService implements UsuariosServiceInterface {
 		em.detach(usuario);
 
 		try {
-			usuario.setSenha(new String(Base64.encodeBase64(cipher
-					.doFinal(usuario.getSenha().getBytes()))));
+			usuario.setSenha(chaveCriptografica.encripta(usuario.getSenha()
+					.getBytes()));
 		} catch (Exception e) {
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 		}

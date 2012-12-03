@@ -36,7 +36,7 @@
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxb-provider</artifactId>
 			<version>2.3.2.Final</version>
-			<scope>test</scope>
+			<scope>provided</scope>
 		</dependency>
 
 
