@@ -85,11 +85,6 @@
 							</wsp:Policy>
 						</sp:Layout>
 						<sp:IncludeTimestamp />
-						<sp:AlgorithmSuite>
-							<wsp:Policy>
-								<sp:Basic128 />
-							</wsp:Policy>
-						</sp:AlgorithmSuite>
 					</wsp:Policy>
 				</sp:TransportBinding>
 				<sp:SignedSupportingTokens>
