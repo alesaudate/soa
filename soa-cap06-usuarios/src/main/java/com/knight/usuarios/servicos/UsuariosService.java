@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.WebApplicationException;
@@ -234,30 +235,35 @@ public class UsuariosService implements UsuariosServiceInterface {
 
 	public Response find(String login, Date modifiedSince,
 			RSAPublica chaveCriptografica) {
-		Usuario usuario = em
-				.createNamedQuery("usuario.encontrar.login", Usuario.class)
-				.setParameter(1, login).getSingleResult();
-		if (usuario == null) {
+		Usuario usuario;
+		try {
+			usuario = em
+					.createNamedQuery("usuario.encontrar.login", Usuario.class)
+					.setParameter(1, login).getSingleResult();
+		} catch (NoResultException e) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 
 		em.detach(usuario);
 
-		try {
-			usuario.setSenha(chaveCriptografica.encripta(usuario.getSenha()
-					.getBytes()));
-		} catch (Exception e) {
-			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-		}
-
 		if (modifiedSince != null) {
 			if (usuario.getDataAtualizacao().after(modifiedSince)) {
+				criptografarSenhaUsuario(usuario, chaveCriptografica);
 				return Response.ok(usuario).build();
 			}
 			return Response.notModified().build();
 		} else {
+			criptografarSenhaUsuario(usuario, chaveCriptografica);
 			return Response.ok(usuario).build();
 		}
 
+	}
+
+	private void criptografarSenhaUsuario(Usuario usuario, RSAPublica chave) {
+		try {
+			usuario.setSenha(chave.encripta(usuario.getSenha().getBytes()));
+		} catch (Exception e) {
+			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

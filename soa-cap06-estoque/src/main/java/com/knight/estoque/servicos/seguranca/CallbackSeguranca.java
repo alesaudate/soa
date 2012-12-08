@@ -43,7 +43,6 @@ public class CallbackSeguranca implements CallbackHandler {
 		for (int i = 0; i < callbacks.length; i++) {
 			if (callbacks[i] instanceof WSPasswordCallback) {
 				WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
-
 				Usuario usuario = encontreUsuario(pc.getIdentifier());
 				if (usuario == null)
 					return;

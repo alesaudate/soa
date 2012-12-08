@@ -16,6 +16,7 @@ public class Cliente {
 		AutoresService service = new AutoresServiceService()
 				.getAutoresServicePort();
 
+		@SuppressWarnings("rawtypes")
 		List<Handler> handlerChain = ((BindingProvider) service).getBinding()
 				.getHandlerChain();
 

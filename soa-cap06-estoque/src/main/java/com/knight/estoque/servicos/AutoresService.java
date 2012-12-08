@@ -17,7 +17,7 @@ import com.knight.estoque.modelos.Autor;
 
 @WebService(portName = "AutoresServicePort", serviceName = "AutoresServiceService", targetNamespace = "http://servicos.estoque.knight.com/", wsdlLocation = "WEB-INF/wsdl/AutoresService.wsdl")
 @EndpointConfig(configFile = "WEB-INF/jaxws-endpoint-config.xml", configName = "Endpoint WS-Security")
-@WebContext(secureWSDLAccess = true, transportGuarantee = "CONFIDENTIAL", urlPattern = "AutoresService")
+@WebContext(transportGuarantee = "CONFIDENTIAL", urlPattern = "AutoresService")
 @Stateless
 public class AutoresService {
 
