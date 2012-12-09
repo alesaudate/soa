@@ -15,7 +15,6 @@ import org.apache.ws.security.WSPasswordCallback;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.util.Base64;
-import org.jboss.resteasy.util.DateUtil;
 
 public class CallbackSeguranca implements CallbackHandler {
 
@@ -33,7 +32,7 @@ public class CallbackSeguranca implements CallbackHandler {
 		}
 	}
 
-	private static String ENDERECO_SERVICO_USUARIOS = "https://localhost:8443/soa-cap06-usuarios-0.0.1-SNAPSHOT/services/usuarios/{login}";
+	private static String ENDERECO_SERVICO_USUARIOS = "https://localhost:8443/soa-cap06-usuarios-0.0.1-SNAPSHOT/services/";
 
 	private static Map<String, Usuario> cache = new ConcurrentHashMap<>();
 
@@ -56,15 +55,17 @@ public class CallbackSeguranca implements CallbackHandler {
 		Usuario usuario = null;
 		try {
 
-			ClientRequest request = new ClientRequest(ENDERECO_SERVICO_USUARIOS)
-					.pathParameters(login).header("Authorization", getAuth())
+			ClientRequest request = new ClientRequest(ENDERECO_SERVICO_USUARIOS
+					+ "usuarios/{login}").pathParameters(login)
+					.header("Authorization", getAuth())
 					.body(MediaType.APPLICATION_XML, chaveRSA)
 					.accept(MediaType.APPLICATION_XML);
 
 			if (cache.containsKey(login)) {
 				usuario = cache.get(login);
 				request.header("If-Modified-Since",
-						DateUtil.formatDate(usuario.getDataAtualizacao()));
+						org.jboss.resteasy.util.DateUtil.formatDate(usuario
+								.getDataAtualizacao()));
 			}
 
 			@SuppressWarnings("unchecked")
@@ -76,8 +77,8 @@ public class CallbackSeguranca implements CallbackHandler {
 			if (response.getStatus() == Status.OK.getStatusCode()) {
 				usuario = response.getEntity(Usuario.class);
 
-				Date date = DateUtil.parseDate(response.getHeaders().getFirst(
-						"Date"));
+				Date date = org.jboss.resteasy.util.DateUtil.parseDate(response
+						.getHeaders().getFirst("Date"));
 				usuario.setDataAtualizacao(date);
 				cache.put(login, usuario);
 				return usuario;

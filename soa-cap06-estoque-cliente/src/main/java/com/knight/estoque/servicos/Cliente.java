@@ -16,20 +16,19 @@ public class Cliente {
 		AutoresService service = new AutoresServiceService()
 				.getAutoresServicePort();
 
-		@SuppressWarnings("rawtypes")
-		List<Handler> handlerChain = ((BindingProvider) service).getBinding()
+		BindingProvider bindingProvider = (BindingProvider) service;
+
+		List<Handler> handlerChain = bindingProvider.getBinding()
 				.getHandlerChain();
 
 		handlerChain.add(new WSSecurityHandler("alexandre", "alexandre"));
 
-		((BindingProvider) service).getBinding().setHandlerChain(handlerChain);
+		bindingProvider.getBinding().setHandlerChain(handlerChain);
 		List<Autor> autores = service.listarAutores();
 
 		for (Autor autor : autores) {
 			System.out.println(autor.getNome());
 		}
-
-		main(args);
 
 	}
 
