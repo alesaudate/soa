@@ -4,7 +4,7 @@ import java.util.List;
 
 public class EBook extends Livro {
 
-	private String formato = "PDF";
+	private FormatoArquivo formato = FormatoArquivo.PDF;
 
 	public EBook() {
 		super();
@@ -15,11 +15,11 @@ public class EBook extends Livro {
 		super(anoDePublicacao, autores, editora, nome, resumo);
 	}
 
-	public String getFormato() {
+	public FormatoArquivo getFormato() {
 		return formato;
 	}
 
-	public void setFormato(String formato) {
+	public void setFormato(FormatoArquivo formato) {
 		this.formato = formato;
 	}
 
