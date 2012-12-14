@@ -20,51 +20,47 @@ import com.knight.estoque.modelos.Usuario;
 @WebService
 public class LivrosService {
 
-   @WebResult(
-         name = "livro")
-   public List<Livro> listarLivros() {
-      LivroDAO livroDAO = obterDAO();
-      return livroDAO.listarLivros();
-   }
+	@WebResult(name = "livro")
+	public List<Livro> listarLivros() {
+		LivroDAO livroDAO = obterDAO();
+		return livroDAO.listarLivros();
+	}
 
-   @WebResult(
-         name = "livro")
-   public List<Livro> listarLivrosPaginacao(int numeroDaPagina,
-         int tamanhoDaPagina) {
-      LivroDAO livroDAO = obterDAO();
-      return livroDAO.listarLivros(numeroDaPagina, tamanhoDaPagina);
-   }
+	@WebResult(name = "livro")
+	public List<Livro> listarLivrosPaginacao(int numeroDaPagina,
+			int tamanhoDaPagina) {
+		LivroDAO livroDAO = obterDAO();
 
-   public void criarLivro(@WebParam(
-         name = "livro") Livro livro, @WebParam(
-         name = "usuario", header = true) Usuario usuario)
-         throws UsuarioNaoAutorizadoException, SOAPException {
-      if (usuario.getLogin().equals("soa")
-            && usuario.getSenha().equals("soa")) {
-         obterDAO().criarLivro(livro);
-      } else if (usuario.getNome().equals("faultCode")) {
-         SOAPFault soapFault = SOAPFactory.newInstance().createFault(
-               "Usuário não autorizado",
-               new QName(SOAPConstants.URI_NS_SOAP_1_1_ENVELOPE,
-                     "Client.autorizacao"));
-         soapFault
-               .setFaultActor("http://servicos.estoque.knight.com/LivrosService");
-         throw new SOAPFaultException(soapFault);
-      } else {
-         throw new UsuarioNaoAutorizadoException(
-               "Usuário não autorizado");
-      }
-   }
+		return livroDAO.listarLivros(numeroDaPagina, tamanhoDaPagina);
+	}
 
-   private LivroDAO obterDAO() {
-      return new LivroDAO();
-   }
+	public void criarLivro(@WebParam(name = "livro") Livro livro,
+			@WebParam(name = "usuario", header = true) Usuario usuario)
+			throws UsuarioNaoAutorizadoException, SOAPException {
+		if (usuario.getLogin().equals("soa")
+				&& usuario.getSenha().equals("soa")) {
+			obterDAO().criarLivro(livro);
+		} else if (usuario.getNome().equals("faultCode")) {
+			SOAPFault soapFault = SOAPFactory.newInstance().createFault(
+					"Usuário não autorizado",
+					new QName(SOAPConstants.URI_NS_SOAP_1_1_ENVELOPE,
+							"Client.autorizacao"));
+			soapFault
+					.setFaultActor("http://servicos.estoque.knight.com/LivrosService");
+			throw new SOAPFaultException(soapFault);
+		} else {
+			throw new UsuarioNaoAutorizadoException("Usuário não autorizado");
+		}
+	}
 
-   public static void main(String[] args) {
-      Endpoint.publish("http://localhost:8080/livros",
-            new LivrosService());
-      System.out.println("Serviço inicializado!");
+	private LivroDAO obterDAO() {
+		return new LivroDAO();
+	}
 
-   }
+	public static void main(String[] args) {
+		Endpoint.publish("http://localhost:8080/livros", new LivrosService());
+		System.out.println("Serviço inicializado!");
+
+	}
 
 }
