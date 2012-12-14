@@ -1,6 +1,5 @@
 package com.knight.estoque.servicos;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,8 +30,9 @@ public class AutoresService {
 	public List<Autor> listarAutores() {
 		WSUsernameTokenPrincipal principal = (WSUsernameTokenPrincipal) context
 				.getUserPrincipal();
-		
-		System.out.println("O usuário " + principal.getName() + " está listando autores");
+
+		System.out.println("O usuário " + principal.getName()
+				+ " está listando autores");
 
 		return em.createQuery("select a from Autor a", Autor.class)
 				.getResultList();
