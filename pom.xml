@@ -19,6 +19,8 @@
 		<module>soa-cap06-usuarios</module>
 		<module>soa-cap06-estoque-cliente</module>
 		<module>soa-cap06-chaves</module>
+		<module>soa-cap07-modelocanonico</module>
+		<module>soa-cap07-contractfirst</module>
 	</modules>
 
 	<build>
