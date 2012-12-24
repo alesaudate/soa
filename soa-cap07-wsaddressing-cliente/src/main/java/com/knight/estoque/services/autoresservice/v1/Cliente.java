@@ -11,7 +11,7 @@ import com.knight.estoque.domain.v1.Autor;
 public class Cliente {
 
 	private static boolean ehAssincrono = true;
-	private String enderecoResposta = "http://localhost:8080/soa-cap07-wsaddressing-servidor-0.0.1-SNAPSHOT/AutoresServiceCallback";
+	private static String enderecoResposta = "http://localhost:8080/soa-cap07-wsaddressing-servidor-0.0.1-SNAPSHOT/AutoresServiceCallback";
 
 	public static void main(String[] args) {
 		AutoresService service = null;
