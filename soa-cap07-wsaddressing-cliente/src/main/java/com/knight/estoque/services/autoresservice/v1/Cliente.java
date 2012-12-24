@@ -11,6 +11,7 @@ import com.knight.estoque.domain.v1.Autor;
 public class Cliente {
 
 	private static boolean ehAssincrono = true;
+	private String enderecoResposta = "http://localhost:8080/soa-cap07-wsaddressing-servidor-0.0.1-SNAPSHOT/AutoresServiceCallback";
 
 	public static void main(String[] args) {
 		AutoresService service = null;
@@ -21,9 +22,7 @@ public class Cliente {
 			List<Handler> handlerChain = ((BindingProvider) service)
 					.getBinding().getHandlerChain();
 
-			handlerChain
-					.add(new AddressingHandler(
-							"http://localhost:8080/soa-cap07-wsaddressing-servidor-0.0.1-SNAPSHOT/AutoresServiceCallback"));
+			handlerChain.add(new AddressingHandler(enderecoResposta));
 			((BindingProvider) service).getBinding().setHandlerChain(
 					handlerChain);
 

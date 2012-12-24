@@ -34,14 +34,20 @@ public class AutoresServiceImpl implements AutoresService {
 	@WebResult(name = "autor", targetNamespace = "")
 	@RequestWrapper(localName = "solicitarRelacaoDeAutores", targetNamespace = "http://knight.com/estoque/services/AutoresService/v1", className = "com.knight.estoque.services.autoresservice.v1.SolicitarRelacaoDeAutores")
 	@ResponseWrapper(localName = "solicitarRelacaoDeAutoresResponse", targetNamespace = "http://knight.com/estoque/services/AutoresService/v1", className = "com.knight.estoque.services.autoresservice.v1.SolicitarRelacaoDeAutoresResponse")
-	@Action(input = "AutoresService/solicitarRelacaoDeAutores", output = "AutoresService/solicitarRelacaoDeAutoresResponse")
+	@Action(input = " ", output = "AutoresService/solicitarRelacaoDeAutoresResponse")
 	@Addressing(enabled = true, required = true)
 	public List<Autor> solicitarRelacaoDeAutores(
 			@WebParam(name = "desde", targetNamespace = "") XMLGregorianCalendar desde) {
 		Autor alexandre = new Autor();
 		alexandre.setNome("Alexandre Saudate");
 
-		return new ArrayList<>(Arrays.asList(alexandre));
+		Autor adriano = new Autor();
+		adriano.setNome("Adriano Almeida");
+
+		Autor paulo = new Autor();
+		paulo.setNome("Paulo Silveira");
+
+		return new ArrayList<>(Arrays.asList(alexandre, adriano, paulo));
 	}
 
 }
