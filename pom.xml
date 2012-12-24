@@ -21,6 +21,8 @@
 		<module>soa-cap06-chaves</module>
 		<module>soa-cap07-modelocanonico</module>
 		<module>soa-cap07-contractfirst</module>
+		<module>soa-cap07-wsaddressing-cliente</module>
+		<module>soa-cap07-wsaddressing-servidor</module>
 	</modules>
 
 	<build>
