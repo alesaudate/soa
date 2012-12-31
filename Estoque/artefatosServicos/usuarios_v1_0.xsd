@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+   xmlns:tns="http://knight.com/usuarios/domain/v1" 
+   targetNamespace="http://knight.com/usuarios/domain/v1">
+   
+   <annotation>
+      <documentation>
+   	     Schema canônico para o sistema de usuários, versão 1.0
+   	  </documentation>   
+   </annotation>
+   
+    <complexType name="usuario">
+    	<sequence>
+    		<element name="id" type="long" />
+    		<element name="nome" type="string" />
+    		<element name="login" type="string" />
+    		<element name="senha" type="string" />
+    	</sequence>
+    </complexType>
+   
+</schema>

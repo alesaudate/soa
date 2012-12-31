@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://knight.com/estoque/services/AutoresService/v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="AutoresService" targetNamespace="http://knight.com/estoque/services/AutoresService/v1">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://knight.com/estoque/services/AutoresService/v1"
+			xmlns:estoque="http://knight.com/estoque/domain/v1">
+			<xsd:import namespace="http://knight.com/estoque/domain/v1"
+				schemaLocation="estoque_v1_0.xsd" />
+			<xsd:element name="listarAutores">
+				<xsd:complexType />
+			</xsd:element>
+			<xsd:element name="listarAutoresResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="autor" type="estoque:autor" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="listarAutoresRequest">
+		<wsdl:part element="tns:listarAutores" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="listarAutoresResponse">
+		<wsdl:part element="tns:listarAutoresResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="AutoresService">
+		<wsdl:operation name="listarAutores">
+			<wsdl:input message="tns:listarAutoresRequest" />
+			<wsdl:output message="tns:listarAutoresResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AutoresServiceSOAP" type="tns:AutoresService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="listarAutores">
+			<soap:operation
+				soapAction="AutoresService/ListarAutores" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AutoresService">
+		<wsdl:port binding="tns:AutoresServiceSOAP" name="AutoresServiceSOAP">
+			<soap:address location="http://localhost:8080/AutoresService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
