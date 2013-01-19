@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+   xmlns:tns="http://knight.com/estoque/domain/v1"
+   xmlns:usuarios="http://knight.com/usuarios/domain/v1" 
+   targetNamespace="http://knight.com/estoque/domain/v1">
+   
+   <annotation>
+      <documentation>
+   	     Schema canônico para o sistema de estoque, versão 1.0
+   	  </documentation>   
+   </annotation>
+   
+   <import 
+      namespace="http://knight.com/usuarios/domain/v1" 
+      schemaLocation="usuarios_v1_0.xsd" />
+   
+   <complexType name="autor">
+      <sequence>
+      	<element name="id" type="long" minOccurs="0"/>
+      	<element name="dataNascimento" type="date" />
+      	<element name="nome" type="string" />
+      	<element name="usuario" type="usuarios:usuario" />
+      </sequence>
+   </complexType>
+</schema>
