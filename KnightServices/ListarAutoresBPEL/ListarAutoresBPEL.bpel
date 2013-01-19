@@ -1,0 +1,82 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jan 07 00:45:47 BRST 2013
+  Author:  alexandreVM
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ListarAutoresBPEL"
+               targetNamespace="http://knight.com/Estoque/Autores"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://knight.com/Estoque/Autores"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://knight.com/estoque/services/AutoresService/v1"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="listarautoresbpel_client" partnerLinkType="ns1:ListarAutoresBPEL" myRole="AutoresService"/>
+    <partnerLink name="ListarAutoresOSB" partnerLinkType="ns1:AutoresService_PL"
+                 partnerRole="AutoresService_Role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:listarAutoresRequest"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:listarAutoresResponse"/>
+    <variable name="ListarAutores_Input"
+              messageType="ns1:listarAutoresRequest"/>
+    <variable name="ListarAutores_Output"
+              messageType="ns1:listarAutoresResponse"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ListarAutoresBPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="listarautoresbpel_client" portType="ns1:AutoresService" operation="listarAutores" variable="inputVariable" createInstance="yes"/>
+    <invoke name="Invk_ListarAutores"
+            partnerLink="ListarAutoresOSB" portType="ns1:AutoresService"
+            operation="listarAutores" inputVariable="ListarAutores_Input"
+            outputVariable="ListarAutores_Output" bpelx:invokeAsDetail="no"/>
+    <assign name="Trf_ListarAutoresOSB_2_Output">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"/>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("xsl/ListarAutores_2_Output.xsl", $ListarAutores_Output.parameters)</from>
+        <to variable="outputVariable" part="parameters"/>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="listarautoresbpel_client" portType="ns1:AutoresService" operation="listarAutores" variable="outputVariable"/>
+  </sequence>
+</process>

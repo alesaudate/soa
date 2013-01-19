@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WL5G3N0:definitions
+     name="AutoresService"
+     targetNamespace="http://knight.com/estoque/services/AutoresService/v1"
+     xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:WL5G3N1="http://knight.com/estoque/services/AutoresService/v1"
+    >
+    <WL5G3N0:types>
+        <xsd:schema targetNamespace="http://knight.com/estoque/services/AutoresService/v1" xmlns:estoque="http://knight.com/estoque/domain/v1"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://knight.com/estoque/services/AutoresService/v1"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://knight.com/estoque/domain/v1" schemaLocation="xsd/estoque_v1_0_1.xsd"/>
+            <xsd:element name="listarAutores">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="listarAutoresResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" name="autor" type="estoque:autor"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </WL5G3N0:types>
+    <WL5G3N0:message name="listarAutoresRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:listarAutores"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="listarAutoresResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:listarAutoresResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:portType name="AutoresService">
+        <WL5G3N0:operation name="listarAutores">
+            <WL5G3N0:input message="WL5G3N1:listarAutoresRequest"/>
+            <WL5G3N0:output message="WL5G3N1:listarAutoresResponse"/>
+        </WL5G3N0:operation>
+    </WL5G3N0:portType>
+    <WL5G3N0:binding name="AutoresServiceSOAP" type="WL5G3N1:AutoresService">
+        <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <WL5G3N0:operation name="listarAutores">
+            <WL5G3N2:operation soapAction="AutoresService/ListarAutores"/>
+            <WL5G3N0:input>
+                <WL5G3N2:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N2:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+    </WL5G3N0:binding>
+    <WL5G3N0:service name="AutoresServiceSOAPQSService">
+        <WL5G3N0:port name="AutoresServiceSOAPQSPort" binding="WL5G3N1:AutoresServiceSOAP">
+            <WL5G3N2:address location="http://alexandreVM-PC:7001/Estoque/artefatosOSB/PSAutoresService"/>
+        </WL5G3N0:port>
+    </WL5G3N0:service>
+</WL5G3N0:definitions>
